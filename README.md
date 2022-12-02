@@ -1,2 +1,2 @@
 # advent-of-code-2022
-Scen stinkt
+Dan the Man stinkt
