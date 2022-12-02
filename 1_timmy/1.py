@@ -12,4 +12,4 @@ with open('1.txt', 'r') as f:
 calories.sort(reverse=True)
 
 print(f"the highest calorie sum is: {max(calories)}")
-print(f"the sum of the top 3 sums is: {calories[0] + calories[1] + calories[2]}")
+print(f"the sum of the top 3 sums is: {sum(calories[:3])}")
