@@ -28,6 +28,7 @@ def part1(you, me):
     # win
     elif you == "A" and me == "Y" or you == "B" and me == "Z" or you == "C" and me == "X":
         return my_score + 6
+    raise Warning("reached end of function part 1 without return")
 
 
 def part2(you, goal):
@@ -39,6 +40,8 @@ def part2(you, goal):
             my_score = 1
         elif you == "C":  # scissors -> paper (2)
             my_score = 2
+        else:
+            raise Warning("could not calculate my_score")
         return my_score + 0
     # need draw
     elif goal == "Y":
@@ -48,6 +51,8 @@ def part2(you, goal):
             my_score = 2
         elif you == "C":  # scissors -> scissors (3)
             my_score = 3
+        else:
+            raise Warning("could not calculate my_score")
         return my_score + 3
     # need win
     elif goal == "Z":
@@ -57,7 +62,10 @@ def part2(you, goal):
             my_score = 3
         elif you == "C":  # scissors -> rock (1)
             my_score = 1
+        else:
+            raise Warning("could not calculate my_score")
         return my_score + 6
+    raise Warning("reached end of function part 2 without return")
 
 
 score1 = 0
