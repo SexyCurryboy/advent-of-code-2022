@@ -1,2 +1,2 @@
 # advent-of-code-2022
-Scen stinkt
+Scen stinkt nöd so fest wie de timmyvis
