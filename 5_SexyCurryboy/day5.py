@@ -27,14 +27,27 @@ for column in crates:
     column_cleaned = [item for item in column if item is not None]
     crates_cleaned.append(column_cleaned)
 
-crates_cleaned_copy = crates_cleaned
+def get_message(crates):
+    message = ""
+    for column in crates:
+        if column != []:
+            message += column[-1]
+        else:
+            message += " "
+    print(message)
+
+#### Part 1 ####
+crates_cleaned_copy = crates_cleaned.copy()
 for instr in instructions:
     for i in range(instr[0]):
         crates_cleaned_copy[instr[2]-1].append(crates_cleaned_copy[instr[1]-1].pop())
+get_message(crates_cleaned_copy)
 
-message = ""
-
-for column in crates_cleaned_copy:
-    message += column.pop()
-
-print(message)
+#### Part 2 ####
+crates_cleaned_copy = crates_cleaned.copy()
+for instr in instructions:
+    mover = crates_cleaned_copy[instr[1]-1][-instr[0]:]
+    for item in mover:
+        crates_cleaned_copy[instr[2]-1].append(item)
+    del crates_cleaned_copy[instr[1]-1][-instr[0]:]
+get_message(crates_cleaned_copy)
