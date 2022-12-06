@@ -16,9 +16,9 @@ cj = browser_cookie3.firefox()
 if not (".adventofcode.com" in str(cj)):
     cj = browser_cookie3.chrome()
 
-webpage = requests.get(f"https://adventofcode.com/2022/day/" + day + "/input", cookies = cj)
-input = open("C:/Users/Sven/Documents/GitHub/advent-of-code-2022/" + day + "_SexyCurryboy/input.txt", "w")
-input.write(webpage.text)
-input.close()
+webpage = requests.get(f"https://adventofcode.com/2022/day/" + day + "/input", cookies=cj)
+daily_input = open("C:/Users/Sven/Documents/GitHub/advent-of-code-2022/" + day + "_SexyCurryboy/input.txt", "w")
+daily_input.write(webpage.text)
+daily_input.close()
 
 f = open("C:/Users/Sven/Documents/GitHub/advent-of-code-2022/" + day + "_SexyCurryboy/day" + day + ".py", "w")
