@@ -4,15 +4,9 @@ def task(line, marker_lenght):
         if count < marker_lenght:
             marker += char
         else:
-            for signal in marker:
-                if marker.count(signal) > 1:
-                    fertig = False
-                    break
-                else:
-                    fertig = True
-            if fertig:
+            if len(set(marker)) == len(marker):
                 print(count)
-                return(count)
+                return()
             else:
                 marker += char
                 del marker[0]
