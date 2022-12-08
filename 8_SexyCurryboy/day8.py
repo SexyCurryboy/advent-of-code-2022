@@ -49,69 +49,56 @@ for hor in range(height):
     forest_helper[0][hor] = 1
     forest_helper[lenght - 1][hor] = 1
 
-print(forest_helper)
-
 count = 0
 for row in forest_helper:
     for tree in row:
         count += int(tree)
-
 print(count)
 
-def check(xb, yb, wald_check):
-    global sichtbar
-    print("ckeck")
-    visible_l = True
-    visible_o = True
-    visible_r = True
-    visible_u = True
-    visible = False
-    if xb == 0 or xb == lenght - 1:
-        visible = True
-        return(visible)
-    elif yb == 0 or yb == lenght -1:
-        visible = True
-        return(visible)
-    for xk in range(xb):
-        print("check 1")
-        print("xb=" + str(xb) + ", yb=" + str(yb) + ", xk=" + str(xk) + ", yk=" + str(yb))
-        print("baum:" + str(wald_check[xb, yb]) + ", kontrolle:" + str(wald_check[xk, yb]))
-        if wald_check[xb, yb] <= wald_check[xk, yb]: #links vom baum
-            visible_l = False
-    if visible_l:
-        visible = True
-        return(visible)
-    for yk in range(yb):
-        print("check 2")
-        print("xb=" + str(xb) + ", yb=" + str(yb) + ", xk=" + str(xb) + ", yk=" + str(yk))
-        print("baum:" + str(wald_check[xb, yb]) + ", kontrolle:" + str(wald_check[xb, yk]))
-        if wald_check[xb, yb] <= wald_check[xb, yk]: #oben vom baum
-            visible_o = False
-    if visible_o:
-        visible = True
-        return(visible)
-    for xk in range(xb, lenght):
-        print("check 3")
-        if wald_check[xb, yb] <= wald_check[xk, yb]: #rechts vom baum
-            visible_r = False
-    if visible_r:
-        visible = True
-        return(visible)
-    for yb in range(yb, lenght):
-        print("check 4")
-        if wald_check[xb, yb] <= wald_check[xb, yk]: #unten vom baum
-            visible_u = False
-    if visible_u:
-        visible = True
-        return(visible)
-    if visible:
-        sichtbar.append([xb, yb])
-    return(visible)            
+forest_helper_scenic = np.full((height, lenght), 1)
 
-def is_visible(wald):
-    counter = 0
-    for yb in range(lenght):
-        for xb in range(height):
-            if check(xb, yb, wald):
-                counter += 1
-    return(counter)
+for ver in range(height - 1):
+    #links nach rechts
+    tree_height = 0
+    sight = 0
+    for hor in range(lenght - 1):
+        if tree_height >= forest[ver][hor]:
+            forest_helper_scenic[ver][hor] = sight
+            sight += 1
+        if tree_height < forest[ver][hor]:
+            tree_height = forest[ver][hor]
+            sight += 1
+
+    #rechts nach links
+    tree_height = 0
+    sight = 0
+    for hor in range(lenght - 1, -1, -1):
+        if tree_height >= forest[ver][hor]:
+            forest_helper_scenic[ver][hor] = forest_helper_scenic[ver][hor] * sight
+            sight += 1
+        if tree_height < forest[ver][hor]:
+            tree_height = forest[ver][hor]
+            sight += 1
+
+for hor in range(lenght - 1):
+    #oben nach unten
+    tree_height = 0
+    sight = 0
+    for ver in range(height - 1):
+        if tree_height >= forest[ver][hor]:
+            forest_helper_scenic[ver][hor] = forest_helper_scenic[ver][hor] * sight
+            sight += 1
+        if tree_height < forest[ver][hor]:
+            tree_height = forest[ver][hor]
+            sight += 1
+    #unten nach oben
+    tree_height = 0
+    for ver in range(height - 1, -1, -1):
+        if tree_height >= forest[ver][hor]:
+            forest_helper_scenic[ver][hor] = forest_helper_scenic[ver][hor] * sight
+            sight += 1
+        if tree_height < forest[ver][hor]:
+            tree_height = forest[ver][hor]
+            sight += 1
+
+print(forest_helper_scenic)
