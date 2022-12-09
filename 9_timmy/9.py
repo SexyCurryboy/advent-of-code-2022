@@ -138,6 +138,7 @@ T6 = Tail((0, 0))
 T7 = Tail((0, 0))
 T8 = Tail((0, 0))
 T9 = Tail((0, 0))
+
 with open('9.txt', 'r') as f:
     for line in f:
         direction, iterations = line[:-1].split()
