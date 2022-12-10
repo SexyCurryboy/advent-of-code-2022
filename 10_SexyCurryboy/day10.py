@@ -1,17 +1,16 @@
 f = open("input.txt", "r")
 input = [line.strip() for line in f]
-import numpy as np
 
 strenght = 0
 cycle = 0
-x = 1
+x = int
 def strenght_check(cycle, x):
     global strenght
     if cycle == 20 or (cycle - 20) % 40 == 0:
         strenght += cycle * x
     return(strenght)
 
-image = []
+image = ""
 row = 0
 def imaging(cycle, x):
     global image
@@ -19,16 +18,16 @@ def imaging(cycle, x):
     if cycle % 40 == 0:
         row += 1
     cycle_image = cycle - (40*row)
-    print(cycle_image)
     if cycle_image in [x-1, x, x+1]:
-        image.append("#")
+        image += "#"
     else:
-        image.append(".")
+        image += "."
+    if (cycle - 1) % 40 == 39:
+        image += "\n"
     return(image)
 
 
-def iterate(function, input):
-    x = 1
+def iterate(function, input, x):
     cycle = 0
     for command in input:
         if command.startswith("noop"):
@@ -42,12 +41,5 @@ def iterate(function, input):
             x += int(command.split()[1])
     return(printer)
 
-print(iterate(strenght_check, input))
-screen = ""
-for index, pixel in enumerate(iterate(imaging, input)):
-    if (index + 1) % 40 == 0:
-        screen += pixel + "\n"
-    else:
-        screen += pixel
-
-print(screen)
+print(iterate(strenght_check, input, 1))
+print(iterate(imaging, input, 2)) #wtf warum muss x 2 sie?!
