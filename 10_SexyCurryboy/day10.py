@@ -8,7 +8,7 @@ def strenght_check(cycle, x):
     global strenght
     if cycle == 20 or (cycle - 20) % 40 == 0:
         strenght += cycle * x
-    return(strenght)
+    return strenght
 
 image = ""
 row = 0
@@ -24,7 +24,7 @@ def imaging(cycle, x):
         image += "."
     if (cycle - 1) % 40 == 39:
         image += "\n"
-    return(image)
+    return image
 
 
 def iterate(function, input, x):
@@ -39,7 +39,7 @@ def iterate(function, input, x):
             cycle += 1
             printer = function(cycle, x)
             x += int(command.split()[1])
-    return(printer)
+    return printer
 
 print(iterate(strenght_check, input, 1))
 print(iterate(imaging, input, 2)) #wtf warum muss x 2 sie?!
